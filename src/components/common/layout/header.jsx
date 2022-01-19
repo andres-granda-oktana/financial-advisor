@@ -1,6 +1,4 @@
 import Head from "next/head"
-import Image from 'next/image'
-import financialLogo from "../../../../public/financial-logo.png"
 import Link from "next/link"
 
 export default function Header (){
