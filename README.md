@@ -1,7 +1,7 @@
 # Financial Advisor APP
 
 # Demo
-https://google.com/
+https://agranda-financial-advisor.herokuapp.com
 
 ## Description :clipboard:
 > A financial advisor asks user for their risk preference, than recommend a portfolio based on user preference. After that, ask user for how much money they currently have allocated to each of the 5 investment categories. This is requested in $ (not a %). And finally if the user's current allocation is not ideal for their risk level, the financial advisor recommends an allocation transference to correspond with suggested allocation.
