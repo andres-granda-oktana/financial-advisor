@@ -8,7 +8,7 @@ https://agranda-financial-advisor.herokuapp.com
 
 ## Installation :wrench:
 
-1. Clone this repo by running `git clone https://github.com/`
+1. Clone this repo by running `git clone https://github.com/andres-granda-oktana/financial-advisor.git`
 2. `cd financial-advisor`
 3. `npm install`
 
