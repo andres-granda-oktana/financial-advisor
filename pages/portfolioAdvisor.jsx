@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import PortfolioAdvisor from "../src/components/portfolioAdvisor"
 
-export default function () {
+export default function PortfolioAdvisorPage () {
 
   const { riskLevel } = useSelector((store) => store.financialAdvisor);
 
@@ -13,7 +13,7 @@ export default function () {
     if(!riskLevel){
         router.push("/riskProfiler")
     }
-  },[]);
+  });
 
   return (
     <>

@@ -11,7 +11,7 @@ export default function TransfersTable (props) {
     const smallCapTransfers  = transfers?.filter((transfers)=>transfers.from === "smallCap")
 
     return(
-        <table className="unstriped text-left transfersTable">
+        <table className="unstriped text-left transfersTable show-for-large">
             <thead>
                 <tr>
                     <th>Transfers</th>

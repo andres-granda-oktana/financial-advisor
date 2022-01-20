@@ -17,15 +17,14 @@ export default function RiskProfiler(){
     }
 
     return (
-        <div className="grid-y align-middle">
-            <h3 style={{paddingBottom:"1ch"}}>Risk Profiler</h3>
-
-            <div className="grid-x" style={{paddingBottom:"1ch"}}>
-                <ActionButton 
+        <div className="container flex-container align-center-middle flex-dir-column">
+            <h3 className="riskProfilerTitle">Risk Profiler</h3>
+            <div className="flex-container align-center-middle riskProfilerPickerContainer">
+                <ActionButton
                     label="CLEAR" 
                     name=""
                     onClick={(e)=>setRiskLevel(e.target.name)} 
-                    className="clearRiskProfiler"
+                    className="riskProfilerClear"
                 />
                 <LevelPicker 
                     riskLevel={riskLevel} 
@@ -35,19 +34,18 @@ export default function RiskProfiler(){
                     label="CONTINUE" 
                     href="/portfolioAdvisor"
                     active={riskLevel}
-                    className="continueButton" 
+                    className="riskProfilerContinue" 
                 />
             </div>
-            
-            <div className="grid-x align-middle">
+            <div className="flex-container align-center-middle flex-dir-column large-flex-dir-row">
                 <LevelsTable 
                     riskLevel={riskLevel} 
                     setRiskLevel={setRiskLevel}
                 />
                 {!!riskLevel && 
-                    <DonutChart 
-                        width="400px" 
-                        height="400px" 
+                    <DonutChart
+                        width="370px" 
+                        height="370px" 
                         riskLevel={riskLevel}
                     />
                 }

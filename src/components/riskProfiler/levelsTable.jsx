@@ -8,7 +8,7 @@ export default function LevelsTable (props) {
     } = props
 
     return(
-        <table className="hover unstriped text-center riskProfilerTable">
+        <table className="hover unstriped text-center">
             <thead>
                 <tr>
                     <th>Risk</th>

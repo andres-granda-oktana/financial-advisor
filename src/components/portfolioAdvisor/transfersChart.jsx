@@ -46,7 +46,7 @@ export default function TransfersChart (props) {
 
     useEffect(()=>{
         calculateTransfersArray();
-    },[transfers])
+    },[transfers]) // eslint-disable-line react-hooks/exhaustive-deps
       
     return (
         <table className="unstriped text-left transfersChart">
