@@ -70,7 +70,7 @@ export default function PortfolioAdvisor(){
 
     return (
 
-        <div className="grid-y align-middle">
+        <div className="container flex-container align-center-middle flex-dir-column">
 
             <h3 style={{paddingBottom:"1ch"}}>Portfolio Advisor</h3>
             <h4 style={{paddingBottom:"1ch"}}>Risk Level: {riskLevel}</h4>
@@ -79,7 +79,7 @@ export default function PortfolioAdvisor(){
 
             <h4 style={{paddingTop:"2ch", paddingBottom:"1ch"}}>Enter current portfolio:</h4>
 
-            <div className="grid-x align-middle">
+            <div className="flex-container align-center-middle flex-dir-column large-flex-dir-row">
                 <AmountsTable
                     amounts={amounts}
                     newAmounts={newAmounts}
@@ -91,7 +91,7 @@ export default function PortfolioAdvisor(){
                 
             </div>
 
-            <div className="grid-x align-middle">
+            <div className="flex-container align-center-middle">
                 <RouteButton
                     label="HOME"
                     href="/riskProfiler"

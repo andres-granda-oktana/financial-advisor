@@ -6,7 +6,7 @@ export default function LevelButton (props) {
         value
     } = props
 
-    let buttonActive = riskLevel===value ? "button levelButton primary" : "button levelButton hollow secondary"
+    let buttonActive = riskLevel===value ? "riskProfilerLevelButton button primary" : "riskProfilerLevelButton button hollow secondary"
     
     return (
         <div style={{}}>
