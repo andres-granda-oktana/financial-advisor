@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react"
-import riskLevelsData from "../../constants/riskLevelsData.json"
 import AmountsTableRow from "./amountsTableRow"
 
 export default function AmountsTable (props) {

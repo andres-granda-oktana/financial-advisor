@@ -71,6 +71,6 @@ export default function DonutChart (props) {
             data={riskLevelData}
             options={options}
             chartEvents={chartEvents}
-      />
+        />
     )
 }

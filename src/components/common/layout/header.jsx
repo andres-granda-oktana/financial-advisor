@@ -19,7 +19,7 @@ export default function Header (){
                     }}
                 >
                     <div className="cell small-12" style={{color:"whitesmoke"}}>
-                        <Link href="/riskProfiler">
+                        <Link href="/riskProfiler" passHref>
                             <h1 style={{marginBottom:"0px", cursor:"pointer"}}>Financial Advisor</h1>
                         </Link>
                     </div>
