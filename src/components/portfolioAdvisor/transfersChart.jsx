@@ -49,7 +49,7 @@ export default function TransfersChart (props) {
     },[transfers]) // eslint-disable-line react-hooks/exhaustive-deps
       
     return (
-        <table className="unstriped text-left transfersChart">
+        <table className="unstriped transfersChart">
             <thead>
                 <tr>
                     <th>Transfers Chart</th>
