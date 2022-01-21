@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setRiskLevelAction } from "../../state/actions/financialAdvisor"
+import { setRiskLevelAction } from "../../state/reducers/financialAdvisor"
 
 import ActionButton from "../common/actionButton";
 import LevelPicker from "./levelPicker"

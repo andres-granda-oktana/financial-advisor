@@ -5,7 +5,7 @@ import AmountsTable from "./amountsTable";
 import TransfersTable from "./transfersTable";
 import { calculatePortfolioTransfers, validateNumericInput } from "../../utils/portfolioAdvisorCalculator";
 import ActionButton from "../common/actionButton";
-import { setAmountsAction } from "../../state/actions/financialAdvisor";
+import { setAmountsAction } from "../../state/reducers/financialAdvisor";
 import TransfersChart from "./transfersChart";
 import RouteButton from "../common/routeButton";
 

@@ -1,14 +1,11 @@
-import { createStore } from "redux";
-import { persistStore, persistReducer } from "redux-persist";
-import localforage from "localforage";
-import rootReducer from "./reducers";
+import { configureStore } from '@reduxjs/toolkit'
 
-const store = createStore(
-    rootReducer,
-    undefined,
-    undefined
-);
+import financialAdvisorReducer from './reducers/financialAdvisor';
 
-persistStore(store);
+const reducers = {
+    financialAdvisor: financialAdvisorReducer
+};
+
+const store = configureStore({ reducer: reducers })
 
 export default store;
