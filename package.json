@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.7.1",
     "foundation-sites": "^6.7.4",
     "localforage": "^1.10.0",
     "next": "latest",
@@ -24,5 +25,7 @@
   "engines": {
     "node": "16.x"
   },
-  "cacheDirectories": [".next/cache"]
+  "cacheDirectories": [
+    ".next/cache"
+  ]
 }

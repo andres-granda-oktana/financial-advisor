@@ -1,5 +1,8 @@
-import * as financialAdvisorTypes from "../types/financialAdvisor"
+import { createAction, createReducer } from '@reduxjs/toolkit'
 import riskLevelsData from "../../constants/riskLevelsData.json"
+
+const setRiskLevelAction = createAction('setRiskLevelAction')
+const setAmountsAction = createAction('setAmountsAction')
 
 const initialState = {
     riskLevel: 0,
@@ -19,34 +22,29 @@ const initialState = {
     },
 }
 
-export default function financialAdvisorReducer (state = initialState, action) {
+const financialAdvisorReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setRiskLevelAction, (state, action) => {
+            
+        const riskLevel = action.payload;
 
-    switch (action.type) {
+        const riskLevelData = {
+            bonds:      riskLevelsData[riskLevel-1]?.bonds,
+            largeCap:   riskLevelsData[riskLevel-1]?.largeCap,
+            midCap:     riskLevelsData[riskLevel-1]?.midCap,
+            foreign:    riskLevelsData[riskLevel-1]?.foreign,
+            smallCap:   riskLevelsData[riskLevel-1]?.smallCap,
+        }
+        
+        state.riskLevel = riskLevel;
+        state.riskLevelData = riskLevelData;
 
-        case financialAdvisorTypes.SET_RISK_LEVEL:
+    })
+    .addCase(setAmountsAction, (state, action) => {
+        state.amounts = action.payload;
+    })
+})
 
-            const riskLevel = action.payload;
+export { setRiskLevelAction, setAmountsAction };
 
-            const riskLevelData = {
-                bonds:      riskLevelsData[riskLevel-1]?.bonds,
-                largeCap:   riskLevelsData[riskLevel-1]?.largeCap,
-                midCap:     riskLevelsData[riskLevel-1]?.midCap,
-                foreign:    riskLevelsData[riskLevel-1]?.foreign,
-                smallCap:   riskLevelsData[riskLevel-1]?.smallCap,
-            }
-                
-            return {
-                ... state, 
-                riskLevel: riskLevel,
-                riskLevelData: riskLevelData,
-            };
-
-        case financialAdvisorTypes.SET_AMOUNTS:
-            return {... state, amounts: action.payload};
-
-        default:
-            return state;
-    }
-}
-
-
+export default financialAdvisorReducer;
