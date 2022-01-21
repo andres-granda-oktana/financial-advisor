@@ -1,7 +1,6 @@
 export default function LevelTable (props) {
 
     const {
-        riskLevel,
         riskLevelData
     } = props
 
@@ -17,10 +16,7 @@ export default function LevelTable (props) {
                 </tr>
             </thead>
             <tbody>
-                <tr 
-                    key={0}
-                    style={{cursor:"pointer"}}
-                >
+                <tr>
                     <td>{riskLevelData.bonds}</td>
                     <td>{riskLevelData.largeCap}</td>
                     <td>{riskLevelData.midCap}</td>

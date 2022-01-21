@@ -14,30 +14,24 @@ export default function TransfersChart (props) {
         },
       }
     };
+
+    const labelsMap = {
+        "bonds": "Bonds",
+        "largeCap": "Large Cap",
+        "midCap": "Mid Cap",
+        "foreign": "Foreign",
+        "smallCap": "Small Cap"
+    }
     
     function calculateTransfersArray () {
 
         if(transfers){
             const data = [
                 ["From", "To", "Amount"]
-              ];
+            ];
                
-            let transfersTemp
-
-            transfersTemp = transfers?.map(t => t.from === 'bonds' ? { ...t, from: 'Bonds' } : t );
-            transfersTemp = transfersTemp?.map(t => t.from === 'largeCap' ? { ...t, from: 'Large Cap' } : t );
-            transfersTemp = transfersTemp?.map(t => t.from === 'midCap' ? { ...t, from: 'Mid Cap' } : t );
-            transfersTemp = transfersTemp?.map(t => t.from === 'foreign' ? { ...t, from: 'Foreign' } : t );
-            transfersTemp = transfersTemp?.map(t => t.from === 'smallCap' ? { ...t, from: 'Small Cap' } : t );
-
-            transfersTemp = transfersTemp?.map(t => t.to === 'bonds' ? { ...t, to: 'Bonds' } : t );
-            transfersTemp = transfersTemp?.map(t => t.to === 'largeCap' ? { ...t, to: 'Large Cap' } : t );
-            transfersTemp = transfersTemp?.map(t => t.to === 'midCap' ? { ...t, to: 'Mid Cap' } : t );
-            transfersTemp = transfersTemp?.map(t => t.to === 'foreign' ? { ...t, to: 'Foreign' } : t );
-            transfersTemp = transfersTemp?.map(t => t.to === 'smallCap' ? { ...t, to: 'Small Cap' } : t );
-
-            transfersTemp?.map((item, index)=>{
-                data.push(Object.values(item));
+            transfers?.map((item, index)=>{
+                data.push([labelsMap[item.from], labelsMap[item.to], item.val]);
             });
 
             setChartData(data);

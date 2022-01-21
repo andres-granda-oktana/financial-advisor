@@ -14,103 +14,69 @@ function round(num) {
     return Math.round(m) / 100 * Math.sign(num);
 }
 
+
 export function calculatePortfolioTransfers (amounts, riskLevelData) {
 
-    const riskLevelDataFraction = {
-        bonds:      riskLevelData?.bonds/100,
-        largeCap:   riskLevelData?.largeCap/100,
-        midCap:     riskLevelData?.midCap/100,
-        foreign:    riskLevelData?.foreign/100,
-        smallCap:   riskLevelData?.smallCap/100,
+    //Calculate risk level fractions to operate
+    const riskLevelDataFraction = {}
+    for ( const [key, value] of Object.entries(riskLevelData)){
+        riskLevelDataFraction[key] = value/100;
     }
 
-    let totalAmount=0
-
-    for (const [keyAmount, valueAmount] of Object.entries(amounts)) {totalAmount += parseInt(valueAmount);}  
-
-    const newAmountTemp={
-        bonds:      round(totalAmount * riskLevelDataFraction.bonds),
-        largeCap:   round(totalAmount * riskLevelDataFraction.largeCap),
-        midCap:     round(totalAmount * riskLevelDataFraction.midCap),
-        foreign:    round(totalAmount * riskLevelDataFraction.foreign),
-        smallCap:   round(totalAmount * riskLevelDataFraction.smallCap)
+    //Calculate total amount
+    let totalAmount=0;
+    for ( const p in amounts) { totalAmount += parseInt(amounts[p]) }
+    
+    //Calculate new ideal amounts with risk level selected
+    const newAmounts = {}
+    for ( const [key, value] of Object.entries(riskLevelDataFraction)){
+        newAmounts[key] = round(totalAmount * value);
     }
 
-    const differenceValTemp={
-        bonds:      round(newAmountTemp.bonds     - amounts.bonds),
-        largeCap:   round(newAmountTemp.largeCap  - amounts.largeCap),
-        midCap:     round(newAmountTemp.midCap    - amounts.midCap),
-        foreign:    round(newAmountTemp.foreign   - amounts.foreign),
-        smallCap:   round(newAmountTemp.smallCap  - amounts.smallCap),
+    //Calculate differences between current amounts and ideal amounts
+    const differences = {}
+    for ( const [key, value] of Object.entries(newAmounts)){
+        differences[key] = round(value - amounts[key]);
     }
 
-    const differenceTemp={
-        bonds:      differenceValTemp.bonds<=0 ? differenceValTemp.bonds : "+"+differenceValTemp.bonds,
-        largeCap:   differenceValTemp.largeCap<=0 ? differenceValTemp.largeCap : "+"+differenceValTemp.largeCap,
-        midCap:     differenceValTemp.midCap<=0 ? differenceValTemp.midCap : "+"+differenceValTemp.midCap,
-        foreign:    differenceValTemp.foreign<=0 ? differenceValTemp.foreign : "+"+differenceValTemp.foreign,
-        smallCap:   differenceValTemp.smallCap<=0 ? differenceValTemp.smallCap : "+"+differenceValTemp.smallCap,
+    //Get differences with sign for display label
+    const differencesLabels = {}
+    for ( const [key, value] of Object.entries(differences)){
+        differencesLabels[key] = value <= 0 ? value : "+" + value;
     }
 
+    //Classify differences in positives and negatives
     let positive = new Map();
     let negative = new Map();
-
-    if(differenceValTemp.bonds > 0){
-        positive.set("bonds",differenceValTemp.bonds);
-    }else if(differenceValTemp.bonds < 0){
-        negative.set("bonds",differenceValTemp.bonds);
+    for ( const [key, value] of Object.entries(differences)){
+        if(value > 0){
+            positive.set(key, value);
+        } else if ( value < 0){
+            negative.set(key, value);
+        }
     }
 
-    if(differenceValTemp.largeCap > 0){
-        positive.set("largeCap",differenceValTemp.largeCap);
-    }else if(differenceValTemp.largeCap < 0){
-        negative.set("largeCap",differenceValTemp.largeCap);
-    }
-
-    if(differenceValTemp.midCap > 0){
-        positive.set("midCap",differenceValTemp.midCap);
-    }else if(differenceValTemp.midCap < 0){
-        negative.set("midCap",differenceValTemp.midCap);
-    }
-
-    if(differenceValTemp.foreign > 0){
-        positive.set("foreign",differenceValTemp.foreign);
-    }else if(differenceValTemp.foreign < 0){
-        negative.set("foreign",differenceValTemp.foreign);
-    }
-
-    if(differenceValTemp.smallCap > 0){
-        positive.set("smallCap",differenceValTemp.smallCap);
-    }else if(differenceValTemp.smallCap < 0){
-        negative.set("smallCap",differenceValTemp.smallCap);
-    }
-
-    // console.log("positive",positive);
-    // console.log("negative",negative);
-
+    //Sort positives and negatives
     const positiveSorted = new Map([...positive.entries()].sort((a, b) => a[1] - b[1]));
     const negativeSorted = new Map([...negative.entries()].sort((a, b) => b[1] - a[1]));
     
-    // console.log("positiveSorted",positiveSorted);
-    // console.log("negativeSorted",negativeSorted);
-
-    let transfersTemp = [];
+    //Calc transfers array
+    let transfers = [];
 
     let breakFlag = false;
     let continueFlag = false;
 
     while( negativeSorted.size > 0 ){
+        console.log(negativeSorted.size)
         continueFlag = false;
+
         breakFlag=false
-        //(1) EQUAL
-        // console.log("(1) EQUAL")
+        //(1) SEARCH FOR EQUAL
         for(const [keyN, valN] of negativeSorted){
             if(breakFlag){ break; }
             for(const [keyP, valP] of positiveSorted){
-                // console.log(valN, valP)
                 if(valN+valP===0){
-                    // console.log("equal-break")
-                    transfersTemp.push({
+                    transfers.push({
                         from: keyN,
                         to: keyP,
                         val: valP
@@ -123,22 +89,15 @@ export function calculatePortfolioTransfers (amounts, riskLevelData) {
                 }
             }
         }
-
-        // console.log("positiveSorted",positiveSorted);
-        // console.log("negativeSorted",negativeSorted);
         if(continueFlag){continue;}
 
         breakFlag=false
-
-        //(2) MINOR POSITIVE
-        // console.log("(2) MINOR POSITIVE")
+        //(2) SEARCH FOR  MINOR POSITIVE
         for(const [keyN, valN] of negativeSorted){
             if(breakFlag){ break; }
             for(const [keyP, valP] of positiveSorted){
-                // console.log(valN, valP)
                 if(Math.abs(valN)>valP){
-                    // console.log("minor positive-break")
-                    transfersTemp.push({
+                    transfers.push({
                         from: keyN,
                         to: keyP,
                         val: valP
@@ -151,22 +110,15 @@ export function calculatePortfolioTransfers (amounts, riskLevelData) {
                 }
             }
         }
-
-        // console.log("positiveSorted",positiveSorted);
-        // console.log("negativeSorted",negativeSorted);
         if(continueFlag){continue;}
 
         breakFlag=false
-
-        //(3) MAYOR POSITIVE
-        // console.log("(3) MAYOR POSITIVE")
+        //(3) SEARCH FOR  MAYOR POSITIVE
         for(const [keyN, valN] of negativeSorted){
             if(breakFlag){ break; }
             for(const [keyP, valP] of positiveSorted){
-                // console.log(valN, valP)
                 if(Math.abs(valN)<valP){
-                    // console.log("mayor positive-break")
-                    transfersTemp.push({
+                    transfers.push({
                         from: keyN,
                         to: keyP,
                         val: Math.abs(valN)
@@ -179,19 +131,13 @@ export function calculatePortfolioTransfers (amounts, riskLevelData) {
                 }
             }
         }
-
-        // console.log("positiveSorted",positiveSorted);
-        // console.log("negativeSorted",negativeSorted);
         if(continueFlag){continue;}
-
         break;
     }
 
-    // console.log("transfersTemp",transfersTemp);
-
     return({
-        newAmounts: newAmountTemp,
-        differences: differenceTemp,
-        transfers: transfersTemp
+        newAmounts: newAmounts,
+        differences: differencesLabels,
+        transfers: transfers
     })
 }
