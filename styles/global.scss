@@ -60,6 +60,21 @@
 @include foundation-visibility-classes;
 // @include foundation-prototype-classes;
 
+//Header
+.headerPage{
+    min-height: 110px; 
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+    margin-bottom: 4ch;
+}
+.headerPage h1{
+    text-align: center;
+    color: whitesmoke;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+
 //Common
 .button{
     margin: 0;
@@ -73,62 +88,84 @@
 //RiskProfilerPage
 
 .riskProfilerTitle{
-    padding-bottom: 1ch;
-    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .riskProfilerPickerContainer{
-    padding-bottom: 3ch;
+    margin-bottom: 1.5rem;
 }
-.riskProfilerLevelPicker{
-    margin: 0ch 2ch;
+
+.riskProfilerLevelsTableRow{
+    cursor: pointer;
+}
+.riskProfilerLevelsTableRow-active{
+ background-color: #1779ba !important;
+ color: white;
 }
 
 .riskProfilerClear a{
-    margin: 0 3ch;
+    margin: 0 1rem;
     padding: 1.5em 2em;
 }
 .riskProfilerContinue a{
-    margin: 0 3ch;
+    margin: 0 1rem;
     padding: 1.5em 1em;
 }
 .riskProfilerLevelButton{
-    padding: 1.5em 1.5em;
-    //spacing
     margin: 0em 0.2em;
+    padding: 1.5em 1.5em;
 }
 
 
 //PortfolioAdvisor
+
+.portfolioAdvisorTitle{
+    margin-bottom: 2rem;
+}
+.portfolioAdvisorLevelTitle{
+    margin-bottom: 1rem;
+}
+.portfolioAdvisorAmountsTitle{
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
 .levelTable{
-    max-width: 710px;
+    max-width: 70ch;
 }
 
 .amountsTable{
     // Only affects large screens
     @include breakpoint(large) {
-        min-width: 430px;
-        width: 430px;
+        min-width: 48ch;
+        width: 48ch;
     }
 }
+
+$portfolioAdvisorRowTableHeight: 3em;
+
 .amountsTable input{
-    max-width: 70px;
+    max-width: 8ch;
 }
 .amountsTable td{
-    height: 44px;
+    height: $portfolioAdvisorRowTableHeight;
 }
 
 .transfersTable td{
-    height: 44px;
+    height: $portfolioAdvisorRowTableHeight;
 }
 
 .transfersChart{
-    min-width: 230px;
-    width: 230px;
+    min-width: 26ch;
+    width: 26ch;
 }
 .transfersChart td{
-    height: 220px;
-    padding: 20px;
+    height: $portfolioAdvisorRowTableHeight*5;
+    padding: 2ch;
+}
+
+.portfolioAdvisorButtonContainer{
+    margin: 1rem 0rem;
 }
 
 

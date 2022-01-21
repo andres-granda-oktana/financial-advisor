@@ -72,12 +72,12 @@ export default function PortfolioAdvisor(){
 
         <div className="container flex-container align-center-middle flex-dir-column">
 
-            <h3 style={{paddingBottom:"1ch"}}>Portfolio Advisor</h3>
-            <h4 style={{paddingBottom:"1ch"}}>Risk Level: {riskLevel}</h4>
+            <h3 className="portfolioAdvisorTitle">Portfolio Advisor</h3>
+            <h4 className="portfolioAdvisorLevelTitle">Risk Level: {riskLevel}</h4>
 
             <LevelTable riskLevel={riskLevel} riskLevelData={riskLevelData}/>
 
-            <h4 style={{paddingTop:"2ch", paddingBottom:"1ch"}}>Enter current portfolio:</h4>
+            <h4 className="portfolioAdvisorAmountsTitle">Enter current portfolio:</h4>
 
             <div className="flex-container align-center-middle flex-dir-column large-flex-dir-row">
                 <AmountsTable
@@ -91,7 +91,7 @@ export default function PortfolioAdvisor(){
                 
             </div>
 
-            <div className="flex-container align-center-middle">
+            <div className="flex-container align-center-middle portfolioAdvisorButtonContainer">
                 <RouteButton
                     label="HOME"
                     href="/riskProfiler"

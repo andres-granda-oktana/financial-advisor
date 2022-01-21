@@ -22,14 +22,13 @@ export default function LevelsTable (props) {
             <tbody>
                 {riskLevelsData.map((level,i)=>{
                     
-                    const rowBackground = level.risk===riskLevel ? "#1779ba" : "" 
-                    const rowColor = level.risk===riskLevel ? "white" : "#0a0a0a" 
+                    const rowLevelClass = level.risk===riskLevel ? "riskProfilerLevelsTableRow riskProfilerLevelsTableRow-active" : "riskProfilerLevelsTableRow" 
 
                     return(
                         <tr 
                             key={i+1} 
-                            onClick={(e)=>setRiskLevel(level.risk)} 
-                            style={{cursor:"pointer", background:rowBackground, color:rowColor}}
+                            onClick={(e)=>setRiskLevel(level.risk)}
+                            className={rowLevelClass}
                         >
                             <td>{level.risk}</td>
                             <td>{level.bonds}</td>

@@ -9,7 +9,7 @@ export default function LevelPicker (props){
     } = props
 
     return(
-        <div className="flex-container align-center-middle flex-dir-column large-flex-dir-row riskProfilerLevelPicker show-for-large">
+        <div className="flex-container align-center-middle flex-dir-column large-flex-dir-row show-for-large">
             {riskLevelsData.map((item, index)=>{
                 return(
                     <LevelButton
